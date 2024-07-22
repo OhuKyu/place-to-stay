@@ -22,7 +22,7 @@ const reducer = (state, action) => {
 
     case 'UPDATE_IMAGES':
       return { ...state, images: [...state.images, action.payload] };
-      
+
     case 'DELETE_IMAGE':
       return {
         ...state,
@@ -31,7 +31,7 @@ const reducer = (state, action) => {
 
     case 'UPDATE_DETAILS':
       return { ...state, details: { ...state.details, ...action.payload } };
-      
+
     case 'UPDATE_LOCATION':
       return { ...state, location: action.payload };
 
@@ -85,8 +85,11 @@ const reducer = (state, action) => {
     case 'UPDATE_ROOM':
       return { ...state, room: action.payload };
 
+    case 'UPDATE_USERS':
+      return { ...state, users: action.payload };
+
     default:
-      throw new Error('No matched action!');
+      throw new Error('Không có hành động phù hợp!');
   }
 };
 
