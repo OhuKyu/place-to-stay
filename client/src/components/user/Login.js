@@ -119,7 +119,7 @@ const Login = () => {
           ? 'Bạn đã có tài khoản chưa? Đăng nhập ngay '
           : "Bạn chưa có tài khoản? Tạo một tài khoản ngay bây giờ "}
         <Button onClick={() => setIsRegister(!isRegister)}>
-          {isRegister ? 'Login' : 'Register'}
+          {isRegister ? 'Đăng nhập' : 'Đăng ký'}
         </Button>
       </DialogActions>
       <DialogActions sx={{ justifyContent: 'center', py: '24px' }}>
