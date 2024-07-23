@@ -91,31 +91,31 @@ import {
     const list = useMemo(
       () => [
         {
-          title: 'Main',
+          title: 'Trang chủ',
           icon: <Dashboard />,
           link: '',
           component: <Main {...{ setSelectedLink, link: '' }} />,
         },
         {
-          title: 'Users',
+          title: 'Người dùng',
           icon: <PeopleAlt />,
           link: 'users',
           component: <Users {...{ setSelectedLink, link: 'users' }} />,
         },
         {
-          title: 'Rooms',
+          title: 'Phòng',
           icon: <KingBed />,
           link: 'rooms',
           component: <Rooms {...{ setSelectedLink, link: 'rooms' }} />,
         },
         {
-          title: 'Requests',
+          title: 'Yêu cầu',
           icon: <NotificationsActive />,
           link: 'requests',
           component: <Requests {...{ setSelectedLink, link: 'requests' }} />,
         },
         {
-          title: 'Messages',
+          title: 'Tin nhắn',
           icon: <MarkChatUnread />,
           link: 'messages',
           component: <Messages {...{ setSelectedLink, link: 'messages' }} />,
