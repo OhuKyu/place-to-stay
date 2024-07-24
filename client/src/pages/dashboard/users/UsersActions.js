@@ -2,32 +2,47 @@ import { Box, CircularProgress, Fab } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Check, Save } from '@mui/icons-material';
 import { green } from '@mui/material/colors';
-import { updateStatus } from '../../../actions/user';
+import { getUsers, updateStatus } from '../../../actions/user';
 import { useValue } from '../../../context/ContextProvider';
 
 const UsersActions = ({ params, rowId, setRowId }) => {
-  const { dispatch } = useValue();
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const {
+    dispatch,
+    state: { currentUser, users },
+  } = useValue()
+  const [loading, setLoading] = useState(false)
+  const [success, setSuccess] = useState(false)
 
   const handleSubmit = async () => {
-    setLoading(true);
+    setLoading(true)
+    console.log("Submitting:", params.row);
 
     const { role, active, _id } = params.row;
-    const result = await updateStatus({ role, active }, _id, dispatch);
+    const result = await updateStatus(
+      { role, active },
+      _id,
+      dispatch,
+      currentUser
+    )
     if (result) {
       setSuccess(true);
       setRowId(null);
+      getUsers(dispatch, currentUser)
     }
-    setLoading(false);
-  };
+    setLoading(false)
+  }
 
   useEffect(() => {
     if (rowId === params.id && success) setSuccess(false);
-  }, [rowId, success, params.id]);
+  }, [rowId]);
 
   return (
-    <Box sx={{ m: 1, position: 'relative' }}>
+    <Box
+      sx={{
+        m: 1,
+        position: 'relative',
+      }}
+    >
       {success ? (
         <Fab
           color="primary"
@@ -37,19 +52,18 @@ const UsersActions = ({ params, rowId, setRowId }) => {
             bgcolor: green[500],
             '&:hover': { bgcolor: green[700] },
           }}
-          aria-label="Check"
-          title="Kiểm tra"
         >
           <Check />
         </Fab>
       ) : (
         <Fab
           color="primary"
-          sx={{ width: 40, height: 40 }}
-          disabled={!rowId || params.id !== rowId || loading}
+          sx={{
+            width: 40,
+            height: 40,
+          }}
+          disabled={params.id !== rowId || loading}
           onClick={handleSubmit}
-          aria-label="Save"
-          title="Lưu"
         >
           <Save />
         </Fab>
@@ -67,7 +81,7 @@ const UsersActions = ({ params, rowId, setRowId }) => {
         />
       )}
     </Box>
-  );
-};
+  )
+}
 
-export default UsersActions;
+export default UsersActions

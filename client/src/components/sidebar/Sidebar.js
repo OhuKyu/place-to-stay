@@ -9,10 +9,10 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'space-between',
   padding: theme.spacing(0, 1),
   ...theme.mixins.toolbar,
-}));
+}))
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
-  const { containerRef } = useValue();
+  const { containerRef } = useValue()
   return (
     <Drawer variant="persistent" hideBackdrop={true} open={isOpen}>
       <DrawerHeader>
@@ -26,7 +26,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
         <PriceSlider />
       </Box>
     </Drawer>
-  );
-};
+  )
+}
 
-export default Sidebar;
+export default Sidebar
