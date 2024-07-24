@@ -4,14 +4,14 @@ const fetchData = async (
 ) => {
   const headers = token
     ? { 'Content-Type': 'application/json', authorization: `Bearer ${token}` }
-    : { 'Content-Type': 'application/json' }
-  body = body ? { body: JSON.stringify(body) } : {}
+    : { 'Content-Type': 'application/json' };
+  body = body ? { body: JSON.stringify(body) } : {};
   try {
-    const response = await fetch(url, { method, headers, ...body })
-    const data = await response.json()
+    const response = await fetch(url, { method, headers, ...body });
+    const data = await response.json();
     if (!data.success) {
       if (response.status === 401)
-        dispatch({ type: 'UPDATE_USER', payload: null })
+        dispatch({ type: 'UPDATE_USER', payload: null });
       throw new Error(data.message);
     }
     return data.result;

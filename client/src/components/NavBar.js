@@ -18,7 +18,7 @@ const NavBar = () => {
   const {
     state: { currentUser },
     dispatch,
-  } = useValue();
+  } = useValue()
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -42,7 +42,7 @@ const NavBar = () => {
               noWrap
               sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}
             >
-              File lỗi bị xoá r ;-;;
+              Xong ùi !! Vẫn bị lỗi file ;-;;
             </Typography>
             <Typography
               variant="h6"
@@ -50,7 +50,7 @@ const NavBar = () => {
               noWrap
               sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
             >
-              Chịu!!!
+              Chán!!
             </Typography>
             {!currentUser ? (
               <Button
@@ -69,7 +69,7 @@ const NavBar = () => {
       <Toolbar />
       <Sidebar {...{ isOpen, setIsOpen }} />
     </>
-  );
-};
+  )
+}
 
-export default NavBar;
+export default NavBar

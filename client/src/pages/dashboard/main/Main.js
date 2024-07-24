@@ -15,19 +15,19 @@ import { getRooms } from '../../../actions/room';
 import { getUsers } from '../../../actions/user';
 import { useValue } from '../../../context/ContextProvider';
 import moment from 'moment';
-import PieRoomsCost from './PieRoomsCost'
+import PieRoomsCost from './PieRoomsCost';
 import AreaRoomsUsers from './AreaRoomsUsers';
 
 const Main = ({ setSelectedLink, link }) => {
   const {
-    state: { rooms, users },
+    state: { rooms, users, currentUser },
     dispatch,
-  } = useValue();
+  } = useValue()
   useEffect(() => {
-    setSelectedLink(link);
-    if (rooms.length === 0) getRooms(dispatch);
-    if (users.length === 0) getUsers(dispatch);
-  }, []);
+    setSelectedLink(link)
+    if (rooms.length === 0) getRooms(dispatch)
+    if (users.length === 0) getUsers(dispatch, currentUser)
+  }, [])
   return (
     <Box
       sx={{
@@ -77,7 +77,7 @@ const Main = ({ setSelectedLink, link }) => {
                   </ListItemAvatar>
                   <ListItemText
                     primary={user?.name}
-                    secondary={`Time Created: ${moment(user?.createdAt).format(
+                    secondary={`Thời gian được tạo ra: ${moment(user?.createdAt).format(
                       'YYYY-MM-DD H:mm:ss'
                     )}`}
                   />

@@ -4,9 +4,9 @@ import React from 'react';
 import { useValue } from '../../context/ContextProvider';
 
 const AccessMessage = () => {
-  const { dispatch } = useValue();
+  const { dispatch } = useValue()
   return (
-    <Container sx={{ py: 5 }}>
+    <Container sx={{ py: 10 }}>
       <Alert severity="error" variant="outlined">
         <AlertTitle>Truy cập bị cấm</AlertTitle>
         Vui lòng đăng nhập hoặc đăng ký để truy cập trang này
@@ -20,7 +20,7 @@ const AccessMessage = () => {
         </Button>
       </Alert>
     </Container>
-  );
-};
+  )
+}
 
-export default AccessMessage;
+export default AccessMessage

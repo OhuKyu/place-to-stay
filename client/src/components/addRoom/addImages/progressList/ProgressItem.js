@@ -7,24 +7,26 @@ import uploadFileProgress from '../../../../firebase/uploadFileProgress';
 import { useValue } from '../../../../context/ContextProvider';
 
 const ProgressItem = ({ file }) => {
-  const [progress, setProgress] = useState(0);
-  const [imageURL, setImageURL] = useState(null);
+  const [progress, setProgress] = useState(0)
+  const [imageURL, setImageURL] = useState(null)
   const {
-    state: { currentUser },
+    state: { currentUser, updatedRoom },
     dispatch,
-  } = useValue();
+  } = useValue()
   useEffect(() => {
     const uploadImage = async () => {
-      const imageName = uuidv4() + '.' + file.name.split('.').pop();
+      const imageName = uuidv4() + '.' + file.name.split('.').pop()
       try {
         const url = await uploadFileProgress(
           file,
-          `rooms/${currentUser?.id}`,
+          `rooms/${updatedRoom ? updatedRoom.uid : currentUser?.id}`,
           imageName,
           setProgress
         );
 
-        dispatch({ type: 'UPDATE_IMAGES', payload: url });
+        dispatch({ type: 'UPDATE_IMAGES', payload: [url] })
+        if (updatedRoom)
+          dispatch({ type: 'UPDATE_ADDED_IMAGES', payload: [url] })
         setImageURL(null);
       } catch (error) {
         dispatch({
@@ -35,8 +37,8 @@ const ProgressItem = ({ file }) => {
       }
     };
     setImageURL(URL.createObjectURL(file));
-    uploadImage();
-  }, [file]);
+    uploadImage()
+  }, [file])
   return (
     imageURL && (
       <ImageListItem cols={1} rows={1}>
@@ -67,4 +69,4 @@ const backDrop = {
   alignItems: 'center',
   justifyContent: 'center',
   background: 'rgba(0,0,0, .5)',
-};
+}

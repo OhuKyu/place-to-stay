@@ -6,13 +6,13 @@ const marks = [
   { value: 0, label: '$0' },
   { value: 25, label: '$25' },
   { value: 50, label: '$50' },
-];
+]
 
 const PriceSlider = () => {
   const {
     state: { priceFilter },
     dispatch,
-  } = useValue();
+  } = useValue()
   return (
     <Box sx={{ mt: 5 }}>
       <Typography>Giá tối đa: {'$ ' + priceFilter}</Typography>
@@ -28,7 +28,7 @@ const PriceSlider = () => {
         }
       />
     </Box>
-  );
-};
+  )
+}
 
-export default PriceSlider;
+export default PriceSlider

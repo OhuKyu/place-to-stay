@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Avatar, Box, CircularProgress, Typography } from '@mui/material';
+import { Avatar, Box, Typography } from '@mui/material';
 import { DataGrid, gridClasses } from '@mui/x-data-grid';
 import { useValue } from '../../../context/ContextProvider';
 import { getUsers } from '../../../actions/user';
@@ -9,33 +9,17 @@ import UsersActions from './UsersActions';
 
 const Users = ({ setSelectedLink, link }) => {
   const {
-    state: { users },
+    state: { users, currentUser },
     dispatch,
-  } = useValue();
+  } = useValue()
 
-  const [pageSize, setPageSize] = useState(5);
-  const [rowId, setRowId] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [editRowsModel, setEditRowsModel] = useState({});
+  const [pageSize, setPageSize] = useState(5)
+  const [rowId, setRowId] = useState(null)
 
   useEffect(() => {
-    setSelectedLink(link);
-    if (users.length === 0) {
-      getUsers(dispatch).finally(() => setLoading(false));
-    } else {
-      setLoading(false);
-    }
-  }, [users.length, dispatch, setSelectedLink, link]);
-
-  const handleEditRowsModelChange = (model) => {
-    setEditRowsModel(model);
-    const editedIds = Object.keys(model);
-    if (editedIds.length > 0) {
-      setRowId(editedIds[0]);
-    } else {
-      setRowId(null);
-    }
-  };
+    setSelectedLink(link)
+    if (users.length === 0) getUsers(dispatch, currentUser)
+  }, [])
 
   const columns = useMemo(
     () => [
@@ -55,18 +39,18 @@ const Users = ({ setSelectedLink, link }) => {
         width: 100,
         type: 'singleSelect',
         valueOptions: ['basic', 'editor', 'admin'],
-        editable: true,
+        editable: currentUser?.role === 'admin',
       },
       {
         field: 'active',
         headerName: 'Hoạt động',
         width: 100,
         type: 'boolean',
-        editable: true,
+        editable: currentUser?.role === 'admin',
       },
       {
         field: 'createdAt',
-        headerName: 'Thời gian tạo',
+        headerName: 'Được tạo tại',
         width: 200,
         renderCell: (params) =>
           moment(params.row.createdAt).format('YYYY-MM-DD HH:MM:SS'),
@@ -81,19 +65,16 @@ const Users = ({ setSelectedLink, link }) => {
         ),
       },
     ],
-    [rowId]
-  );
-
-  if (loading) {
-    return (
-      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 5 }}>
-        <CircularProgress />
-      </Box>
-    );
-  }
+    [rowId, currentUser]
+  )
 
   return (
-    <Box sx={{ height: 400, width: '100%' }}>
+    <Box
+      sx={{
+        height: 400,
+        width: '100%',
+      }}
+    >
       <Typography
         variant="h3"
         component="h3"
@@ -112,17 +93,19 @@ const Users = ({ setSelectedLink, link }) => {
           top: params.isFirstVisible ? 0 : 5,
           bottom: params.isLastVisible ? 0 : 5,
         })}
-        editRowsModel={editRowsModel}
-        onEditRowsModelChange={handleEditRowsModelChange}
         sx={{
           [`& .${gridClasses.row}`]: {
             bgcolor: (theme) =>
               theme.palette.mode === 'light' ? grey[200] : grey[900],
           },
         }}
+        onCellEditCommit={(params) => {
+          console.log("Cell edit commit:", params);
+          setRowId(params.id);
+        }}
       />
     </Box>
-  );
-};
+  )
+}
 
-export default Users;
+export default Users

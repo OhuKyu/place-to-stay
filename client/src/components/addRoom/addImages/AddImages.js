@@ -27,7 +27,7 @@ const AddImages = () => {
         <div style={{ padding: '16px' }} {...getRootProps()}>
           <input {...getInputProps()} />
           {isDragActive ? (
-            <p style={{ color: 'green' }}>Drop the files here...</p>
+            <p style={{ color: 'green' }}>Thả các tập tin ở đây...</p>
           ) : (
             <p>Kéo 'n' Thả một số tệp vào đây hoặc nhấp để chọn tệp</p>
           )}
@@ -37,7 +37,7 @@ const AddImages = () => {
       <ProgressList {...{ files }} />
       <ImagesList />
     </>
-  );
-};
+  )
+}
 
 export default AddImages;

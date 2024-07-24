@@ -12,8 +12,10 @@ import { Brightness4, Brightness7, Home, Menu } from '@mui/icons-material';
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SideList from './SideList';
+import Protected from '../../components/protected/Protected';
+import Login from '../../components/user/Login';
 
-const drawerWidth = 240;
+const drawerWidth = 240
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
@@ -31,7 +33,7 @@ const AppBar = styled(MuiAppBar, {
       duration: theme.transitions.duration.enteringScreen,
     }),
   }),
-}));
+}))
 
 export default function Dashboard() {
   const [open, setOpen] = useState(false);
@@ -45,13 +47,13 @@ export default function Dashboard() {
         },
       }),
     [dark]
-  );
+  )
 
   const handleDrawerOpen = () => {
     setOpen(true);
-  };
+  }
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   return (
     <ThemeProvider theme={darkTheme}>
       <Box sx={{ display: 'flex' }}>
@@ -88,8 +90,11 @@ export default function Dashboard() {
             </IconButton>
           </Toolbar>
         </AppBar>
-        <SideList {...{ open, setOpen }} />
+        <Protected>
+          <SideList {...{ open, setOpen }} />
+        </Protected>
       </Box>
+      <Login />
     </ThemeProvider>
-  );
+  )
 }

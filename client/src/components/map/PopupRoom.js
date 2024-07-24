@@ -7,8 +7,8 @@ import 'swiper/css/pagination';
 import { useValue } from '../../context/ContextProvider';
 
 const PopupRoom = ({ popupInfo }) => {
-  const { title, description, price, images } = popupInfo;
-  const { dispatch } = useValue();
+  const { title, description, price, images } = popupInfo
+  const { dispatch } = useValue()
   return (
     <Card sx={{ maxWidth: 400 }}>
       <ImageListItem sx={{ display: 'block' }}>
@@ -18,7 +18,7 @@ const PopupRoom = ({ popupInfo }) => {
               'linear-gradient(to bottom, rgba(0,0,0,0.7)0%, rgba(0,0,0,0.3)70%, rgba(0,0,0,0)100%)',
             zIndex: 2,
           }}
-          title={price === 0 ? 'Free Stay' : '$' + price}
+          title={price === 0 ? 'Miễn phí' : '$' + price}
           position="top"
         />
         <ImageListItemBar
@@ -28,7 +28,7 @@ const PopupRoom = ({ popupInfo }) => {
         />
         <Swiper
           modules={[Autoplay, Pagination]}
-          autoplay
+          autoplay={{ delay: 3000 }}
           pagination={{ clickable: true }}
           style={{
             '--swiper-pagination-color': 'rgba(255,255,255, 0.8)',
@@ -60,7 +60,7 @@ const PopupRoom = ({ popupInfo }) => {
         </Swiper>
       </ImageListItem>
     </Card>
-  );
-};
+  )
+}
 
-export default PopupRoom;
+export default PopupRoom

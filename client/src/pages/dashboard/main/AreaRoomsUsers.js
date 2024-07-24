@@ -10,53 +10,53 @@ import {
 } from 'recharts';
 import { useValue } from '../../../context/ContextProvider';
 
-const months = 5;
-const today = new Date();
+const months = 5
+const today = new Date()
 const tempData = [];
 for (let i = 0; i < months; i++) {
   const date = new Date(
     today.getFullYear(),
     today.getMonth() - (months - (i + 1))
-  );
+  )
   tempData.push({
     date,
     name: moment(date).format('MMM YYYY'),
     users: 0,
     rooms: 0,
-  });
+  })
 }
 
 export default function AreaRoomsUsers() {
   const {
     state: { rooms, users },
-  } = useValue();
-  const [data, setData] = useState([]);
+  } = useValue()
+  const [data, setData] = useState([])
 
   useEffect(() => {
     for (let i = 0; i < months; i++) {
-      tempData[i].users = 0;
+      tempData[i].users = 0
     }
     users.forEach((user) => {
       for (let i = 0; i < months; i++) {
         if (moment(tempData[i].date).isSame(user?.createdAt, 'month'))
-          return tempData[i].users++;
+          return tempData[i].users++
       }
-    });
-    setData([...tempData]);
-  }, [users]);
+    })
+    setData([...tempData])
+  }, [users])
 
   useEffect(() => {
     for (let i = 0; i < months; i++) {
-      tempData[i].rooms = 0;
+      tempData[i].rooms = 0
     }
     rooms.forEach((room) => {
       for (let i = 0; i < months; i++) {
         if (moment(tempData[i].date).isSame(room?.createdAt, 'month'))
-          return tempData[i].rooms++;
+          return tempData[i].rooms++
       }
-    });
-    setData([...tempData]);
-  }, [rooms]);
+    })
+    setData([...tempData])
+  }, [rooms])
   return (
     <div style={{ width: '100%', height: 300, minWidth: 250 }}>
       <ResponsiveContainer>
@@ -89,5 +89,5 @@ export default function AreaRoomsUsers() {
         </AreaChart>
       </ResponsiveContainer>
     </div>
-  );
+  )
 }

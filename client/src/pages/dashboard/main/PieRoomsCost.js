@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { PieChart, Pie, Cell, Tooltip } from 'recharts';
 import { useValue } from '../../../context/ContextProvider';
 
-const COLORS = ['#00C49F', '#0088FE', '#FFBB28', '#FF8042'];
+const COLORS = ['#00C49F', '#0088FE', '#FFBB28', '#FF8042']
 
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel = ({
@@ -14,9 +14,9 @@ const renderCustomizedLabel = ({
   outerRadius,
   percent,
 }) => {
-  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-  const x = cx + radius * Math.cos(-midAngle * RADIAN);
-  const y = cy + radius * Math.sin(-midAngle * RADIAN);
+  const radius = innerRadius + (outerRadius - innerRadius) * 0.5
+  const x = cx + radius * Math.cos(-midAngle * RADIAN)
+  const y = cy + radius * Math.sin(-midAngle * RADIAN)
 
   return (
     <text
@@ -28,8 +28,8 @@ const renderCustomizedLabel = ({
     >
       {`${(percent * 100).toFixed(0)}%`}
     </text>
-  );
-};
+  )
+}
 export default function PieRoomsCost() {
   const {
     state: { rooms },
@@ -42,18 +42,18 @@ export default function PieRoomsCost() {
       between15And35 = 0,
       moreThan35 = 0;
     rooms.forEach((room) => {
-      if (room.price === 0) return free++;
-      if (room.price < 15) return lessThan15++;
-      if (room.price <= 35) return between15And35++;
-      moreThan35++;
-    });
+      if (room.price === 0) return free++
+      if (room.price < 15) return lessThan15++
+      if (room.price <= 35) return between15And35++
+      moreThan35++
+    })
     setCostGroups([
       { name: 'Miễn phí', qty: free },
       { name: 'Ít hơn $15', qty: lessThan15 },
       { name: 'Từ $15 đến $35', qty: between15And35 },
       { name: 'Hơn $35', qty: moreThan35 },
-    ]);
-  }, [rooms]);
+    ])
+  }, [rooms])
   return (
     <Box
       sx={{
@@ -92,5 +92,5 @@ export default function PieRoomsCost() {
         </Box>
       </Stack>
     </Box>
-  );
+  )
 }

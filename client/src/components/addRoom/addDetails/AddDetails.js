@@ -59,7 +59,7 @@ const AddDetails = () => {
               inputProps={{ type: 'number', min: 1, max: 50 }}
               value={price}
               onChange={handlePriceChange}
-              name="Giá"
+              name="price"
             />
           )}
         </RadioGroup>
@@ -71,7 +71,7 @@ const AddDetails = () => {
       <InfoField
         mainProps={{
           name: 'description',
-          label: 'Miêu tả',
+          label: 'Description',
           value: description,
         }}
         minLength={10}
