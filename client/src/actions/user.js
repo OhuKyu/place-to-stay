@@ -19,7 +19,7 @@ export const register = async (user, dispatch) => {
       payload: {
         open: true,
         severity: 'success',
-        message: 'Tài khoản của bạn đã được tạo thành công',
+        message: 'Your account has been created successfully',
       },
     });
   }
@@ -97,4 +97,15 @@ export const getUsers = async (dispatch) => {
   if (result) {
     dispatch({ type: 'UPDATE_USERS', payload: result });
   }
+};
+
+export const updateStatus = (updatedFields, userId, dispatch) => {
+  return fetchData(
+    {
+      url: `${url}/updateStatus/${userId}`,
+      method: 'PATCH',
+      body: updatedFields,
+    },
+    dispatch
+  );
 };
