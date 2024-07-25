@@ -1,3 +1,4 @@
+// Users.js
 import { useEffect, useMemo, useState } from 'react';
 import { Avatar, Box, Typography } from '@mui/material';
 import { DataGrid, gridClasses } from '@mui/x-data-grid';
@@ -99,8 +100,8 @@ const Users = ({ setSelectedLink, link }) => {
               theme.palette.mode === 'light' ? grey[200] : grey[900],
           },
         }}
-        onCellEditCommit={(params) => {
-          console.log("Cell edit commit:", params);
+        onCellEditStop={(params) => {
+          console.log("Cell edit stop:", params);
           setRowId(params.id);
         }}
       />
